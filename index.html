@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Case Studies </title>
+    <link rel="icon" href="107.jpg" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0f1d;
+            --bg-secondary: #131a2d;
+            --accent-primary: #6c63ff;
+            --accent-secondary: #43cea2;
+            --accent-tertiary: #ff6b6b;
+            --text-primary: #f0f4ff;
+            --text-secondary: #a9b3cc;
+            --card-bg: rgba(25, 32, 56, 0.6);
+            --card-border: rgba(108, 99, 255, 0.3);
+            --glass-bg: rgba(19, 26, 45, 0.6);
+            --glass-border: rgba(108, 99, 255, 0.15);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(67, 206, 162, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 85% 30%, rgba(108, 99, 255, 0.1) 0%, transparent 20%),
+                linear-gradient(to bottom, var(--bg-primary), var(--bg-secondary));
+            min-height: 100vh;
+            padding: 0 1rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Header Styles */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            position: relative;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            font-size: 1.5rem;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 101;
+        }
+
+        .nav-toggle:hover {
+            color: var(--accent-primary);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        nav a:hover {
+            color: var(--text-primary);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            transition: var(--transition);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+            nav .nav-list {
+                display: none;
+                flex-direction: column;
+                gap: 1rem;
+                position: absolute;
+                top: 100%;
+                right: 0;
+                background: var(--bg-secondary);
+                padding: 1.5rem 2rem;
+                border-radius: 15px;
+                box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            }
+            nav .nav-list.active {
+                display: flex;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 6rem 0 4rem;
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, var(--text-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            padding: 1.1rem 2.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(108, 99, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(108, 99, 255, 0.4);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-secondary), var(--accent-primary));
+            opacity: 0;
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .cta-button:hover::before {
+            opacity: 1;
+        }
+
+        /* Cards Grid */
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 5rem 0 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            width: 60%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 3px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 5rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 2.2rem;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            transform: translateY(0);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            perspective: 1000px;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-10px) rotateY(5deg);
+            box-shadow: 0 15px 35px rgba(108, 99, 255, 0.25);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card-icon {
+            font-size: 2.8rem;
+            margin-bottom: 1.8rem;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.6rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            margin-bottom: 1.8rem;
+            font-size: 1.05rem;
+            min-height: 60px;
+        }
+
+        .card .topics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card .topic {
+            background: rgba(108, 99, 255, 0.15);
+            color: var(--accent-primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .card-link {
+            color: var(--accent-secondary);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .card-link:hover {
+            color: var(--accent-primary);
+            gap: 0.7rem;
+        }
+
+        /* Topics Section */
+        .topics-section {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 4rem;
+            margin: 5rem 0;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .topics-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(108, 99, 255, 0.1) 0%, transparent 70%);
+            z-index: -1;
+            animation: rotate 20s linear infinite;
+        }
+
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2.5rem;
+        }
+
+        .topic-card {
+            background: rgba(25, 32, 56, 0.4);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(108, 99, 255, 0.4);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .topic-card h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .topic-card h4 i {
+            color: var(--accent-primary);
+        }
+
+        .topic-card ul {
+            padding-left: 1.5rem;
+        }
+
+        .topic-card li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            color: var(--text-secondary);
+        }
+
+        .topic-card li::before {
+            content: '▹';
+            color: var(--accent-secondary);
+            position: absolute;
+            left: -1.5rem;
+        }
+
+        /* Featured Resource */
+        .featured-resource {
+            background: linear-gradient(135deg, rgba(108, 99, 255, 0.15), rgba(67, 206, 162, 0.1));
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 5rem 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            border: 1px solid var(--glass-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-resource::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80') center/cover no-repeat;
+            opacity: 0.05;
+            z-index: -1;
+        }
+
+        .featured-resource h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, var(--accent-secondary), var(--accent-primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .featured-resource p {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            border-top: 1px solid rgba(108, 99, 255, 0.1);
+            margin-top: 3rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.8rem;
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(108, 99, 255, 0.1);
+            color: var(--text-primary);
+            font-size: 1.3rem;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 5px 15px rgba(108, 99, 255, 0.3);
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .pulse {
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        /* Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(108, 99, 255, 0.3);
+            animation: float 8s infinite ease-in-out;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .cards-grid, .topics-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+            
+            .hero h1 {
+                font-size: 3.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.6rem;
+            }
+            
+            nav ul {
+                gap: 1.2rem;
+            }
+            
+            .topics-section, .featured-resource {
+                padding: 2.5rem 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+            
+            .hero {
+                padding: 4rem 0 2rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .cards-grid, .topics-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                margin: 3rem 0 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated background particles -->
+    <div class="particles" id="particles"></div>
+
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-code-branch"></i>
+                <span>DevCaseHub</span>
+            </div>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav>
+                <ul class="nav-list">
+                    <li><a href="#resources">Resources</a></li>
+                    <li><a href="#topics">Topics</a></li>
+                    <li><a href="#featured">Featured</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <h1>Master Development with Real-World Case Studies</h1>
+            <p>Curated resources for developers to learn from production implementations, scaling challenges, and architectural decisions.</p>
+            <a href="#resources" class="cta-button">Explore Resources</a>
+        </section>
+
+        <h2 class="section-title" id="resources">Resource Categories</h2>
+        
+        <!-- Add this just above <div class="cards-grid"> -->
+<div style="text-align:center; margin-bottom:2rem;">
+    <input type="text" id="resourceSearch" placeholder="Search resources or topics..." style="padding:0.8rem 1.2rem; border-radius:25px; border:1px solid var(--card-border); width:320px; max-width:90%;">
+</div>
+        <div class="cards-grid">
+            <div class="card floating" style="animation-delay: 0.2s;">
+                <div class="card-icon">
+                    <i class="fas fa-cloud"></i>
+                </div>
+                <h3>Cloud Providers & Hosting</h3>
+                <div class="topics">
+                    <span class="topic">AWS</span>
+                    <span class="topic">GCP</span>
+                    <span class="topic">Vercel</span>
+                    <span class="topic">Netlify</span>
+                </div>
+                <p>Real-world deployments and scaling solutions from leading platforms.</p>
+                <a href="#" class="card-link">
+                    Explore Cloud Resources
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            
+            <div class="card floating" style="animation-delay: 0.4s;">
+                <div class="card-icon">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+                <h3>Frontend & Tooling</h3>
+                <div class="topics">
+                    <span class="topic">Next.js</span>
+                    <span class="topic">Remix</span>
+                    <span class="topic">React</span>
+                    <span class="topic">Vue</span>
+                </div>
+                <p>Deep technical walkthroughs from framework experts and UI specialists.</p>
+                <a href="#" class="card-link">
+                    Explore Frontend Resources
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            
+            <div class="card floating" style="animation-delay: 0.6s;">
+                <div class="card-icon">
+                    <i class="fas fa-tachometer-alt"></i>
+                </div>
+                <h3>Performance Optimization</h3>
+                <div class="topics">
+                    <span class="topic">Core Web Vitals</span>
+                    <span class="topic">Lighthouse</span>
+                    <span class="topic">Bundle Size</span>
+                    <span class="topic">WebPageTest</span>
+                </div>
+                <p>Real performance audits, optimization strategies, and measurable results.</p>
+                <a href="#" class="card-link">
+                    Explore Performance Resources
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            
+            <div class="card floating" style="animation-delay: 0.8s;">
+                <div class="card-icon">
+                    <i class="fas fa-building"></i>
+                </div>
+                <h3>Company Tech Blogs</h3>
+                <div class="topics">
+                    <span class="topic">Shopify</span>
+                    <span class="topic">Netflix</span>
+                    <span class="topic">Spotify</span>
+                    <span class="topic">GitHub</span>
+                </div>
+                <p>Engineering insights from industry leaders and innovative teams.</p>
+                <a href="#" class="card-link">
+                    Explore Tech Blogs
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            
+            <div class="card floating" style="animation-delay: 1.0s;">
+                <div class="card-icon">
+                    <i class="fas fa-sync-alt"></i>
+                </div>
+                <h3>Migration Journeys</h3>
+                <div class="topics">
+                    <span class="topic">Monolith to Micro</span>
+                    <span class="topic">Framework Migration</span>
+                    <span class="topic">Database</span>
+                    <span class="topic">Legacy Modernization</span>
+                </div>
+                <p>Technology transitions, rewrites, and modernization case studies.</p>
+                <a href="#" class="card-link">
+                    Explore Migration Resources
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            
+            <div class="card floating" style="animation-delay: 1.2s;">
+                <div class="card-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Security & DevOps</h3>
+                <div class="topics">
+                    <span class="topic">DevSecOps</span>
+                    <span class="topic">CI/CD</span>
+                    <span class="topic">Infra as Code</span>
+                    <span class="topic">Zero Trust</span>
+                </div>
+                <p>Secure development practices, deployment pipelines, and infrastructure management.</p>
+                <a href="#" class="card-link">
+                    Explore Security Resources
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            
+            <div class="card floating" style="animation-delay: 1.4s;">
+                <div class="card-icon">
+                    <i class="fas fa-server"></i>
+                </div>
+                <h3>Backend & Databases</h3>
+                <div class="topics">
+                    <span class="topic">GraphQL</span>
+                    <span class="topic">REST API</span>
+                    <span class="topic">PostgreSQL</span>
+                    <span class="topic">Redis</span>
+                </div>
+                <p>API design, database optimization, and backend scaling patterns.</p>
+                <a href="#" class="card-link">
+                    Explore Backend Resources
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            
+            <div class="card floating" style="animation-delay: 1.6s;">
+                <div class="card-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>Mobile & Cross-Platform</h3>
+                <div class="topics">
+                    <span class="topic">React Native</span>
+                    <span class="topic">Flutter</span>
+                    <span class="topic">PWA</span>
+                    <span class="topic">Mobile Web</span>
+                </div>
+                <p>Native and hybrid app development experiences and optimizations.</p>
+                <a href="#" class="card-link">
+                    Explore Mobile Resources
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            
+            <div class="card floating" style="animation-delay: 1.8s;">
+                <div class="card-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3>AI & Emerging Tech</h3>
+                <div class="topics">
+                    <span class="topic">Machine Learning</span>
+                    <span class="topic">WebAssembly</span>
+                    <span class="topic">AR/VR</span>
+                    <span class="topic">Blockchain</span>
+                </div>
+                <p>Innovative applications of AI, AR/VR, and next-gen technologies.</p>
+                <a href="#" class="card-link">
+                    Explore AI Resources
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="topics-section" id="topics">
+            <h2 class="section-title">Expanded Case Study Topics</h2>
+            <div class="topics-grid">
+                <div class="topic-card">
+                    <h4><i class="fas fa-code"></i> Frontend Technologies</h4>
+                    <ul>
+                        <li>Next.js ISR/SSR implementations</li>
+                        <li>Remix data loading patterns</li>
+                        <li>CSS architecture solutions</li>
+                        <li>State management at scale</li>
+                        <li>Design system implementations</li>
+                        <li>Micro-frontend architectures</li>
+                    </ul>
+                </div>
+                
+                <div class="topic-card">
+                    <h4><i class="fas fa-server"></i> Backend & Infrastructure</h4>
+                    <ul>
+                        <li>Serverless architecture patterns</li>
+                        <li>Database scaling strategies</li>
+                        <li>Event-driven architectures</li>
+                        <li>Kubernetes in production</li>
+                        <li>Distributed systems design</li>
+                        <li>High availability configurations</li>
+                    </ul>
+                </div>
+                
+                <div class="topic-card">
+                    <h4><i class="fas fa-rocket"></i> Performance & Optimization</h4>
+                    <ul>
+                        <li>Core Web Vitals improvements</li>
+                        <li>Bundle size reduction techniques</li>
+                        <li>Edge computing implementations</li>
+                        <li>CDN optimization strategies</li>
+                        <li>Database query optimization</li>
+                        <li>Real-time performance monitoring</li>
+                    </ul>
+                </div>
+                
+                <div class="topic-card">
+                    <h4><i class="fas fa-sync-alt"></i> Migration & Modernization</h4>
+                    <ul>
+                        <li>Monolith to microservices</li>
+                        <li>Framework migrations (React, Vue, etc)</li>
+                        <li>Database migration strategies</li>
+                        <li>Cloud migration journeys</li>
+                        <li>Legacy system modernization</li>
+                        <li>Infrastructure as Code adoption</li>
+                    </ul>
+                </div>
+                
+                <div class="topic-card">
+                    <h4><i class="fas fa-shield-alt"></i> Security & DevOps</h4>
+                    <ul>
+                        <li>DevSecOps implementation</li>
+                        <li>CI/CD pipeline optimization</li>
+                        <li>Zero Trust architecture</li>
+                        <li>Compliance case studies</li>
+                        <li>Infrastructure security patterns</li>
+                        <li>Incident response strategies</li>
+                    </ul>
+                </div>
+                
+                <div class="topic-card">
+                    <h4><i class="fas fa-mobile"></i> Mobile & Emerging Tech</h4>
+                    <ul>
+                        <li>Cross-platform development</li>
+                        <li>Progressive Web App implementations</li>
+                        <li>WebAssembly case studies</li>
+                        <li>AR/VR development experiences</li>
+                        <li>IoT backend implementations</li>
+                        <li>AI integration patterns</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="featured-resource" id="featured">
+            <h3>Featured Resource</h3>
+            <p>Discover the GitHub Post-Mortem Repository - a comprehensive collection of technical post-mortems from major incidents across the industry. Learn from real failures and the solutions implemented.</p>
+            <a href="https://github.com/danluu/post-mortems" target="_blank" class="cta-button pulse">
+                <i class="fab fa-github"></i> Explore Post-Mortems
+            </a>
+        </div>
+
+        <footer id="about">
+            <div class="social-links">
+                <a href="https://github.com/jahidads" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://x.com/jahidhasan_tw" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://bd.linkedin.com/in/jahidads" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://jahidads.github.io/Portfolio/" target="_blank"><i class="fab fa-dev"></i></a>
+                <a href="https://discord.com/users/jahidads" target="_blank"><i class="fab fa-discord"></i></a>
+            </div>
+            <div class="footer-logo" id="footer">
+                <i class="fas fa-code-branch"></i>
+                <span style="background: linear-gradient(90deg, #6c63ff, #43cea2); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">DevCaseHub</span>
+            </div>
+            <p>&copy; 2025 </p>
+            <p>Made by <i class="fas fa-heart" style="color: var(--accent-tertiary);"></i> Jahid Hasan</p>
+        </footer>
+    </div>
+
+    <button id="scrollTopBtn" style="display:none;position:fixed;bottom:40px;right:40px;z-index:999;background:linear-gradient(90deg,#6c63ff,#43cea2);color:#fff;border:none;border-radius:50%;width:50px;height:50px;font-size:1.5rem;box-shadow:0 5px 15px rgba(108,99,255,0.3);cursor:pointer;">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Create background particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 40;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random properties
+                const size = Math.random() * 10 + 3;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const delay = Math.random() * 5;
+                const duration = Math.random() * 10 + 10;
+                const opacity = Math.random() * 0.5 + 0.1;
+                
+                // Apply properties
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${posX}%`;
+                particle.style.top = `${posY}%`;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.opacity = opacity;
+                
+                // Random color (accent colors)
+                const colors = [
+                    'rgba(108, 99, 255, OPACITY)',
+                    'rgba(67, 206, 162, OPACITY)',
+                    'rgba(255, 107, 107, OPACITY)'
+                ];
+                const color = colors[Math.floor(Math.random() * colors.length)].replace('OPACITY', opacity);
+                particle.style.background = color;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Initialize particles when page loads
+        document.addEventListener('DOMContentLoaded', createParticles);
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add hover effect to cards
+        const cards = document.querySelectorAll('.card, .topic-card');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.zIndex = '10';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.zIndex = '1';
+            });
+        });
+        
+        // Add floating effect to featured resource button
+        const ctaButton = document.querySelector('.pulse');
+        if (ctaButton) {
+            setInterval(() => {
+                ctaButton.classList.toggle('pulse');
+            }, 3000);
+        }
+        
+        document.querySelector('.nav-toggle').addEventListener('click', function() {
+    document.querySelector('.nav-list').classList.toggle('active');
+});
+document.getElementById('resourceSearch').addEventListener('input', function(e) {
+    const query = e.target.value.toLowerCase();
+    document.querySelectorAll('.card').forEach(card => {
+        const text = card.innerText.toLowerCase();
+        card.style.display = text.includes(query) ? '' : 'none';
+    });
+});
+
+// Scroll to top button
+const scrollTopBtn = document.getElementById('scrollTopBtn');
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+        scrollTopBtn.style.display = 'block';
+    } else {
+        scrollTopBtn.style.display = 'none';
+    }
+});
+
+scrollTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+    </script>
+</body>
+</html>
